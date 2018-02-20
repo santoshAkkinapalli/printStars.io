@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<style>
+    .star {
+      font-weight: 800;
+      font-size: 50px;
+      color: gold;
+    }
+    
+    .bigbg {
+      background-color: #313131;
+      color: azure;
+      border-radius: 0px;
+    }
+  .containerResult{
+    font-weight: 800;
+    font-size: 50px;
+    color: #313131;    
+    padding-left: 30px;
+  }
+</style>  
+</head>
+
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+ <div class="jumbotron bigbg">
+  <h5>How many stars you would like to print - Angular JS <span class="star">*****</span></h5><br>
+  <input class="form-control" type="number" ng-model="givenNumber" ng-change="printStars()" placeholder="Enter the number to print stars pattern " autofocus>
+  </div>
+  <section class="container-fluid containerResult">
+  <p ng-bind-html="trustAsHtml(temp)"></p>
+  </section>
+  
+</div>
+<script>
+  var app = angular.module('myApp',[]);
+  app.controller('myCtrl',function($scope,$sce){     
+   $scope.printStars = function(){
+   var n = $scope.givenNumber;
+   $scope.temp = "";
+   var i,j;
+   for(i=0; i<n ; i++){
+   for(j=n-i; j>0; j--){
+     $scope.temp += "* ";
+   }
+     $scope.temp += '<p>';
+   }
+}
+$scope.trustAsHtml = function(html){
+return $sce.trustAsHtml(html);
+}
+});
+</script>
+</body>
+</html>
